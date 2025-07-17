@@ -1,3 +1,15 @@
-local RS = game:GetService("ReplicatedStorage")
-RS:WaitForChild("GiveSeed"):FireServer("CandyBlossom", 12)
-RS:WaitForChild("GivePet"):FireServer("Raccoon", 5, 1)
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local giveSeedEvent = ReplicatedStorage:WaitForChild("CmdrClient"):WaitForChild("Commands"):WaitForChild("giveseed")
+for i = 1, 12 do
+    giveSeedEvent:FireServer("candy blossom")
+end
+
+local givePetEvent = ReplicatedStorage:FindFirstChild("GivePet") or ReplicatedStorage:FindFirstChild("PetEvent")
+if givePetEvent then
+    givePetEvent:FireServer({
+        name = "raccoon",
+        weight = 5,
+        age = 1
+    })
+end
